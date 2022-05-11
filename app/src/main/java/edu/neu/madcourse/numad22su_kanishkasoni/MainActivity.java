@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickAbout_me(View view){
         Context context = getApplicationContext();
-        CharSequence text = "Hello toast!";
+        CharSequence text = "Kanishka Soni : soni.kan@northeastern.edu";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
