@@ -3,6 +3,7 @@ package edu.neu.madcourse.numad22su_kanishkasoni;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -25,5 +26,10 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
 
+    }
+
+    public void openAcitvity_Clicky(View view){
+        Intent intent = new Intent(this, Activity2.class);
+        startActivity(intent);
     }
 }
