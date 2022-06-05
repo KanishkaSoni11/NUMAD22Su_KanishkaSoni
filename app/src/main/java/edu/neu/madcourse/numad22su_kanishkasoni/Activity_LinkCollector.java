@@ -35,6 +35,8 @@ public class Activity_LinkCollector extends AppCompatActivity {
         for (String name : sampleNames) {
             linkCollectorList.add(new LinkCollector(name, url));
         }
+        linkCollectorList.add(new LinkCollector("Kan","https://google.com"));
+
 
 
         urlRecyclerView = findViewById(R.id.linkCollector_recycler_view);
@@ -51,9 +53,13 @@ public class Activity_LinkCollector extends AppCompatActivity {
     }
 
     public void onClick_Url(View view) {
-        TextView textView = findViewById(R.id.url);
+        System.out.println("View 1 + " + view);
+
+        TextView textView = view.findViewById(R.id.url);
         CharSequence text = textView.getText();
+        System.out.println("View -- " + text );
         Uri webpage = Uri.parse(String.valueOf(text));
+
         Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
         startActivity(webIntent);
     }
