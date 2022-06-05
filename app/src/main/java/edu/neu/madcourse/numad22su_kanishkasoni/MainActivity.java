@@ -40,4 +40,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Activity2.class);
         startActivity(intent);
     }
+
+    public  void openActivity_LinkCollector(View view) {
+        Intent intent = new Intent(this, Activity_LinkCollector.class);
+        startActivity(intent);
+    }
 }
