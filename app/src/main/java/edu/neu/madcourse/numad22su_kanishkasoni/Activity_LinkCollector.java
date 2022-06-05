@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,5 +56,16 @@ public class Activity_LinkCollector extends AppCompatActivity {
         Uri webpage = Uri.parse(String.valueOf(text));
         Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
         startActivity(webIntent);
+    }
+
+    public void onClick_fab(View view){
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
     }
 }
