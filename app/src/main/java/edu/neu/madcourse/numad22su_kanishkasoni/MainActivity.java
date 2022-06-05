@@ -14,9 +14,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    RecyclerView peopleRecyclerView;
-
-
+    RecyclerView urlRecyclerView;
 
 
     @Override
