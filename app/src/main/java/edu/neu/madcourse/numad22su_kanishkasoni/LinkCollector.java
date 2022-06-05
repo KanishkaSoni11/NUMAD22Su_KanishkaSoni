@@ -4,6 +4,14 @@ public class LinkCollector {
 
     private final String name;
 
+    @Override
+    public String toString() {
+        return "LinkCollector{" +
+                "name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
+
     private final String url;
 
     /**
