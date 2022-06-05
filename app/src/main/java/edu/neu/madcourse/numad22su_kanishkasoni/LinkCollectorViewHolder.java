@@ -20,6 +20,6 @@ public class LinkCollectorViewHolder extends RecyclerView.ViewHolder{
         // sets the name of the person to the name textview of the viewholder.
         nameTV.setText(theLinkToBind.getName());
         // sets the url of the person to the age textview of the viewholder.
-        urlTV.setText(String.valueOf(theLinkToBind.getUrl()));
+        urlTV.setText((theLinkToBind.getUrl()));
     }
 }
