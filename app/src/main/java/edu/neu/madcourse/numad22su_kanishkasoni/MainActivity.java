@@ -19,12 +19,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void clickAbout_me(View view){
-        Context context = getApplicationContext();
-        CharSequence text = "Kanishka Soni : soni.kan@northeastern.edu";
-        int duration = Toast.LENGTH_SHORT;
+//        Context context = getApplicationContext();
+//        CharSequence text = "Kanishka Soni : soni.kan@northeastern.edu";
+//        int duration = Toast.LENGTH_SHORT;
+//
+//        Toast toast = Toast.makeText(context, text, duration);
+//        toast.show();
 
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+        Intent intent = new Intent(this, Activity_About.class);
+        startActivity(intent);
 
     }
 
