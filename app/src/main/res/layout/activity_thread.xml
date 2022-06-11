@@ -10,23 +10,44 @@
         android:id="@+id/button_findPrimes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:onClick="onClick_findPrimes"
         android:text="Find Primes"
-        tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="180dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_terminateSearch"
+        android:id="@+id/button_TerminateSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Terminate Search"
-        tools:layout_editor_absoluteX="112dp"
-        tools:layout_editor_absoluteY="285dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_findPrimes" />
 
     <TextView
         android:id="@+id/textView_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="316dp"
         android:text="Prime Number"
-        tools:layout_editor_absoluteX="150dp"
-        tools:layout_editor_absoluteY="411dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_numberChecked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number Being Checked"
+        app:layout_constraintBottom_toTopOf="@+id/textView_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_TerminateSearch" />
 </androidx.constraintlayout.widget.ConstraintLayout>
