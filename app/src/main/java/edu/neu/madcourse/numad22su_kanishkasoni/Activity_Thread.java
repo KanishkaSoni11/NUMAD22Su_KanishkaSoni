@@ -48,7 +48,7 @@ public class Activity_Thread extends AppCompatActivity {
         @Override
         public void run() {
 
-            for (int i = 2; i <= 10; i++) {
+            for (int i = 2; i <= 100; i++) {
                 final int finalI = i;
 
                 //The handler changes the TextView running in the UI thread.
@@ -59,7 +59,7 @@ public class Activity_Thread extends AppCompatActivity {
                     }
                 });
                 try {
-                    Thread.sleep(1000); //Makes the thread sleep or be inactive for 10 seconds
+                    Thread.sleep(100); //Makes the thread sleep or be inactive for 10 seconds
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
