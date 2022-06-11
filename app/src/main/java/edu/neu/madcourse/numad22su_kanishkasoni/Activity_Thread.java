@@ -9,10 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+
 
 public class Activity_Thread extends AppCompatActivity {
-    private static final String TAG = "Activity_Thread";
     private Handler textHandler = new Handler();
     TextView textView_number;
     TextView textView_numberBeingChecked;
@@ -27,6 +26,7 @@ public class Activity_Thread extends AppCompatActivity {
     }
 
     public void onClick_findPrimes(View view) {
+        terminateSearch = false;
         runnableThread runnableThread = new runnableThread();
         new Thread(runnableThread).start();
 
