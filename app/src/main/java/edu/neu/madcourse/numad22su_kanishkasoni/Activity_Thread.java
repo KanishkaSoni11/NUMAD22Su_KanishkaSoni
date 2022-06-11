@@ -16,6 +16,7 @@ public class Activity_Thread extends AppCompatActivity {
     private Handler textHandler = new Handler();
     TextView textView_number;
     TextView textView_numberBeingChecked;
+    private boolean terminateSearch = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,11 @@ public class Activity_Thread extends AppCompatActivity {
     public void onClick_findPrimes(View view) {
         runnableThread runnableThread = new runnableThread();
         new Thread(runnableThread).start();
+
+    }
+
+    public void onClick_TerminateSearch(View view){
+        terminateSearch = true;
 
     }
 
@@ -47,8 +53,8 @@ public class Activity_Thread extends AppCompatActivity {
 
         @Override
         public void run() {
-
-            for (int i = 2; i <= 100; i++) {
+            int i = 2;
+            while (!terminateSearch) {
                 final int finalI = i;
 
                 //The handler changes the TextView running in the UI thread.
@@ -59,10 +65,11 @@ public class Activity_Thread extends AppCompatActivity {
                     }
                 });
                 try {
-                    Thread.sleep(100); //Makes the thread sleep or be inactive for 10 seconds
+                    Thread.sleep(50); //Makes the thread sleep or be inactive for 10 seconds
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+                i++;
             }
         }
     }

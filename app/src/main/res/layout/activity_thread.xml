@@ -22,6 +22,7 @@
         android:id="@+id/button_TerminateSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onClick_TerminateSearch"
         android:text="Terminate Search"
         app:layout_constraintBottom_toTopOf="@+id/textView_number"
         app:layout_constraintEnd_toEndOf="parent"
