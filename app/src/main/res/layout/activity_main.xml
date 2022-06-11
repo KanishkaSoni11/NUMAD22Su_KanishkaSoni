@@ -54,4 +54,16 @@
         app:layout_constraintTop_toBottomOf="@+id/button"
         app:layout_constraintVertical_bias="0.478" />
 
+    <Button
+        android:id="@+id/button_findPrime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="openAcitvity_findPrimes"
+        android:text="Find Primes"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clicky_clicky" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,4 +45,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Activity_LinkCollector.class);
         startActivity(intent);
     }
+
+    public void openAcitvity_findPrimes(View view){
+        Intent intent = new Intent(this, Activity_FindPrimes.class);
+        startActivity(intent);
+    }
 }
