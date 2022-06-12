@@ -70,11 +70,6 @@ public class Activity_Thread extends AppCompatActivity {
         terminateSearch = true;
     }
 
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-        super.onPointerCaptureChanged(hasCapture);
-    }
-
     class runnableThread implements Runnable {
         boolean isPrime(int n) {
             if (n == 2)
