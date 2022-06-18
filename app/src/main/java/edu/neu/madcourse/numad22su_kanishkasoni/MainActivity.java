@@ -3,14 +3,9 @@ package edu.neu.madcourse.numad22su_kanishkasoni;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
 
     public  void openActivity_LinkCollector(View view) {
         Intent intent = new Intent(this, Activity_LinkCollector.class);
+        startActivity(intent);
+    }
+
+    public void openAcitvity_findPrimes(View view){
+        Intent intent = new Intent(this, Activity_Thread.class);
         startActivity(intent);
     }
 }
