@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 
 import com.google.android.gms.common.api.ApiException;
@@ -38,7 +37,7 @@ public class Activity_Location extends AppCompatActivity {
     private LocationRequest locationRequest;
     private TextView textViewDistance;
     private double distance;
-    private double startLatitute;
+    private double startLatitude;
     private double startLongitude;
     private double endLongitude;
     private double endLatitude;
@@ -60,7 +59,7 @@ public class Activity_Location extends AppCompatActivity {
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         locationRequest.setInterval(5000);
-//        locationRequest.setFastestInterval(2000);
+        locationRequest.setFastestInterval(2000);
 
         getCurrentLocation();
 
@@ -77,7 +76,10 @@ public class Activity_Location extends AppCompatActivity {
         }
 
 
-        if (ActivityCompat.checkSelfPermission(Activity_Location.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(Activity_Location.this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
             if (isGPSEnabled()) {
 
@@ -95,17 +97,17 @@ public class Activity_Location extends AppCompatActivity {
 
                                     int index = locationResult.getLocations().size() - 1;
                                     locationResult.getLocations().get(index).getAccuracy();
-                                    if (startLatitute == 0 && startLongitude == 0 ) {
-                                        startLatitute = locationResult.getLocations().get(index).getLatitude();
+                                    if (startLatitude == 0.0 && startLongitude == 0.0) {
+                                        startLatitude = locationResult.getLocations().get(index).getLatitude();
                                         startLongitude = locationResult.getLocations().get(index).getLongitude();
-                                        endLatitude = startLatitute;
-                                        endLongitude = startLatitute;
+                                        endLatitude = startLatitude;
+                                        endLongitude = startLongitude;
                                         float[] results = new float[1];
 
                                         textViewLatitude.setText("Latitude : " + endLatitude);
                                         textViewLongitude.setText("Longitude: " + endLongitude);
 
-                                        Location.distanceBetween(startLatitute, startLongitude, endLatitude, endLongitude, results);
+                                        Location.distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude, results);
 
 
                                         distance = distance + results[0];
@@ -113,9 +115,9 @@ public class Activity_Location extends AppCompatActivity {
 
                                         textViewDistance.setText("Distance : " + distance);
 
-                                    } else  {
+                                    } else {
                                         startLongitude = endLongitude;
-                                        startLatitute = endLatitude;
+                                        startLatitude = endLatitude;
                                         endLatitude = locationResult.getLocations().get(index).getLatitude();
                                         endLongitude = locationResult.getLocations().get(index).getLongitude();
                                         float[] results = new float[1];
@@ -123,15 +125,13 @@ public class Activity_Location extends AppCompatActivity {
                                         textViewLatitude.setText("Latitude : " + endLatitude);
                                         textViewLongitude.setText("Longitude: " + endLongitude);
 
-                                        Location.distanceBetween(startLatitute, startLongitude, endLatitude, endLongitude, results);
+                                        Location.distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude, results);
                                         distance = distance + results[0];
 
 
                                         textViewDistance.setText("Distance : " + distance);
 
                                     }
-//                                    endLatitude = locationResult.getLocations().get(index).getLatitude();
-//                                    endLongitude = locationResult.getLocations().get(index).getLongitude();
 
                                 }
                             }
@@ -141,8 +141,6 @@ public class Activity_Location extends AppCompatActivity {
                 turnOnGPS();
             }
 
-        } else {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
     }
 
@@ -162,13 +160,13 @@ public class Activity_Location extends AppCompatActivity {
 
 
     public void onClick_ResetDistance(View view) {
-        distance = 0;
-        textViewDistance.setText("Distance : " + 0);
+        distance = 0.0;
+        startLatitude = endLatitude;
+        startLongitude = endLongitude;
+        textViewDistance.setText("Distance : " + 0.0);
     }
 
     private void turnOnGPS() {
-
-
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest);
         builder.setAlwaysShow(true);
@@ -198,7 +196,6 @@ public class Activity_Location extends AppCompatActivity {
                             break;
 
                         case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                            //Device does not have location
                             break;
                     }
                 }
@@ -206,4 +203,29 @@ public class Activity_Location extends AppCompatActivity {
         });
 
     }
+
+    public void onClick_Precise(View view) {
+
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(2000);
+
+        getCurrentLocation();
+
+    }
+
+    public void onClick_Approx(View view) {
+
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(2000);
+
+        getCurrentLocation();
+
+    }
+
 }
