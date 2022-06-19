@@ -74,8 +74,8 @@ public class Activity_Location extends AppCompatActivity {
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-        locationRequest.setInterval(5000);
-        locationRequest.setFastestInterval(2000);
+        locationRequest.setInterval(100);
+        locationRequest.setFastestInterval(100);
 
         getCurrentLocation();
 
@@ -228,8 +228,8 @@ public class Activity_Location extends AppCompatActivity {
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
 
-        locationRequest.setInterval(5000);
-        locationRequest.setFastestInterval(2000);
+        locationRequest.setInterval(100);
+        locationRequest.setFastestInterval(100);
 
         getCurrentLocation();
 
@@ -240,8 +240,8 @@ public class Activity_Location extends AppCompatActivity {
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(Priority.PRIORITY_BALANCED_POWER_ACCURACY);
 
-        locationRequest.setInterval(5000);
-        locationRequest.setFastestInterval(2000);
+        locationRequest.setInterval(100);
+        locationRequest.setFastestInterval(100);
 
         getCurrentLocation();
 
