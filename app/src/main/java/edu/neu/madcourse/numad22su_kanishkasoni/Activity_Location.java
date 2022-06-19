@@ -82,7 +82,13 @@ public class Activity_Location extends AppCompatActivity {
                                 if (locationResult.getLocations().size() > 0) {
 
                                     int index = locationResult.getLocations().size() - 1;
+                                    if(startLatitute == 0 ) {
+                                         startLatitute = locationResult.getLocations().get(index).getLatitude();
+                                    }
 
+                                    if(startLongitude == 0) {
+                                        startLongitude = locationResult.getLocations().get(index).getLongitude();
+                                    }
                                     double endLatitude = locationResult.getLocations().get(index).getLatitude();
                                     double endLongitude = locationResult.getLocations().get(index).getLongitude();
                                     float[] results = new float[1];
@@ -90,7 +96,7 @@ public class Activity_Location extends AppCompatActivity {
                                     textViewLatitude.setText("Latitude : " + endLatitude);
                                     textViewLongitude.setText("Longitude: " + endLongitude);
 
-                                    Location.distanceBetween(endLatitude, endLongitude, endLatitude, endLongitude, results);
+                                    Location.distanceBetween(startLatitute, startLongitude, endLatitude, endLongitude, results);
 
                                     textViewDistance.setText("Distance : " + (distance + results[0]));
                                 }
@@ -105,11 +111,6 @@ public class Activity_Location extends AppCompatActivity {
             requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
     }
-
-
-//        Location.distanceBetween(latitude, longitude, latitude, longitude, results);
-//        distance = 2;
-//        textViewDistance.setText("Distance : " + (distance+ results[0]));
 
 
     private boolean isGPSEnabled() {
