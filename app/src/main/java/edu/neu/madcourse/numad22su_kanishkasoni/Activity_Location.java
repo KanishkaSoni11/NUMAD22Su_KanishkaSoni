@@ -11,6 +11,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class Activity_Location extends AppCompatActivity implements LocationListener {
@@ -19,7 +20,7 @@ public class Activity_Location extends AppCompatActivity implements LocationList
     private TextView textViewLongitude;
     private LocationManager locationManager;
     private TextView textViewDistance;
-
+    private int distance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +54,13 @@ public class Activity_Location extends AppCompatActivity implements LocationList
         float[] results = new float[1];
         double longitude = location.getLongitude();
         double latitude = location.getLatitude();
-        textViewLatitude.setText("Latitude :" + latitude);
+        textViewLatitude.setText("Latitude : " + latitude);
         textViewLongitude.setText("Longitude: " + longitude);
 
 
         Location.distanceBetween(latitude, longitude, latitude, longitude, results);
-        textViewDistance.setText("Distance : " + results[0]);
+        distance = 2;
+        textViewDistance.setText("Distance : " + (distance+ results[0]));
 
     }
 
@@ -75,5 +77,10 @@ public class Activity_Location extends AppCompatActivity implements LocationList
     @Override
     public void onProviderDisabled(@NonNull String provider) {
         LocationListener.super.onProviderDisabled(provider);
+    }
+
+    public void onClick_ResetDistance(View view) {
+        distance = 0;
+        textViewDistance.setText("Distance : " + 0);
     }
 }
