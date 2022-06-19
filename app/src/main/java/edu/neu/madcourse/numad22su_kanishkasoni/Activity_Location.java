@@ -56,14 +56,13 @@ public class Activity_Location extends AppCompatActivity {
         textViewLatitude = (TextView) findViewById(R.id.textView_latitude);
         textViewLongitude = (TextView) findViewById(R.id.textView_longitude);
 
-        radioGroup =  findViewById(R.id.radioGroup_accuracy);
+        radioGroup = findViewById(R.id.radioGroup_accuracy);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if(checkedId == R.id.radioButton_Approx){
+                if (checkedId == R.id.radioButton_Approx) {
                     onClick_Approx();
-                }
-                else if(checkedId == R.id.radioButton_Precise) {
+                } else if (checkedId == R.id.radioButton_Precise) {
                     onClick_Precise();
                 }
             }
@@ -74,7 +73,7 @@ public class Activity_Location extends AppCompatActivity {
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-        locationRequest.setInterval(100);
+        locationRequest.setInterval(500);
         locationRequest.setFastestInterval(100);
 
         getCurrentLocation();
@@ -91,15 +90,21 @@ public class Activity_Location extends AppCompatActivity {
                     {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
         }
 
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "Please give Precise location to access", Toast.LENGTH_SHORT).show();
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, "Precise Accuracy Granted", Toast.LENGTH_SHORT).show();
+        }
+
 
         if (ActivityCompat.checkSelfPermission(Activity_Location.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                || ActivityCompat.checkSelfPermission(this,
+                && ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
             if (isGPSEnabled()) {
-
-
                 LocationServices.getFusedLocationProviderClient(Activity_Location.this)
                         .requestLocationUpdates(locationRequest, new LocationCallback() {
                             @Override
@@ -134,8 +139,10 @@ public class Activity_Location extends AppCompatActivity {
                                     } else {
                                         startLongitude = endLongitude;
                                         startLatitude = endLatitude;
+
                                         endLatitude = locationResult.getLocations().get(index).getLatitude();
                                         endLongitude = locationResult.getLocations().get(index).getLongitude();
+
                                         float[] results = new float[1];
 
                                         textViewLatitude.setText("Latitude : " + endLatitude);
@@ -155,7 +162,7 @@ public class Activity_Location extends AppCompatActivity {
 
             } else {
                 turnOnGPS();
-                getCurrentLocation();
+
             }
 
         }
@@ -222,13 +229,12 @@ public class Activity_Location extends AppCompatActivity {
     }
 
 
-
     public void onClick_Precise() {
 
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
 
-        locationRequest.setInterval(100);
+        locationRequest.setInterval(500);
         locationRequest.setFastestInterval(100);
 
         getCurrentLocation();
@@ -236,12 +242,11 @@ public class Activity_Location extends AppCompatActivity {
     }
 
     public void onClick_Approx() {
-
         locationRequest = LocationRequest.create();
-        locationRequest.setPriority(Priority.PRIORITY_BALANCED_POWER_ACCURACY);
+        locationRequest.setPriority(Priority.PRIORITY_LOW_POWER);
 
-        locationRequest.setInterval(100);
-        locationRequest.setFastestInterval(100);
+        locationRequest.setInterval(1000);
+        locationRequest.setFastestInterval(1000);
 
         getCurrentLocation();
 
