@@ -37,9 +37,11 @@ public class Activity_Location extends AppCompatActivity {
     private TextView textViewLongitude;
     private LocationRequest locationRequest;
     private TextView textViewDistance;
-    private int distance;
+    private double distance;
     private double startLatitute;
     private double startLongitude;
+    private double endLongitude;
+    private double endLatitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,9 @@ public class Activity_Location extends AppCompatActivity {
 
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
         locationRequest.setInterval(5000);
-        locationRequest.setFastestInterval(2000);
+//        locationRequest.setFastestInterval(2000);
 
         getCurrentLocation();
 
@@ -65,10 +68,19 @@ public class Activity_Location extends AppCompatActivity {
 
 
     public void getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        }
+
 
         if (ActivityCompat.checkSelfPermission(Activity_Location.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
             if (isGPSEnabled()) {
+
 
                 LocationServices.getFusedLocationProviderClient(Activity_Location.this)
                         .requestLocationUpdates(locationRequest, new LocationCallback() {
@@ -82,23 +94,45 @@ public class Activity_Location extends AppCompatActivity {
                                 if (locationResult.getLocations().size() > 0) {
 
                                     int index = locationResult.getLocations().size() - 1;
-                                    if(startLatitute == 0 ) {
-                                         startLatitute = locationResult.getLocations().get(index).getLatitude();
-                                    }
-
-                                    if(startLongitude == 0) {
+                                    locationResult.getLocations().get(index).getAccuracy();
+                                    if (startLatitute == 0 && startLongitude == 0 ) {
+                                        startLatitute = locationResult.getLocations().get(index).getLatitude();
                                         startLongitude = locationResult.getLocations().get(index).getLongitude();
+                                        endLatitude = startLatitute;
+                                        endLongitude = startLatitute;
+                                        float[] results = new float[1];
+
+                                        textViewLatitude.setText("Latitude : " + endLatitude);
+                                        textViewLongitude.setText("Longitude: " + endLongitude);
+
+                                        Location.distanceBetween(startLatitute, startLongitude, endLatitude, endLongitude, results);
+
+
+                                        distance = distance + results[0];
+
+
+                                        textViewDistance.setText("Distance : " + distance);
+
+                                    } else  {
+                                        startLongitude = endLongitude;
+                                        startLatitute = endLatitude;
+                                        endLatitude = locationResult.getLocations().get(index).getLatitude();
+                                        endLongitude = locationResult.getLocations().get(index).getLongitude();
+                                        float[] results = new float[1];
+
+                                        textViewLatitude.setText("Latitude : " + endLatitude);
+                                        textViewLongitude.setText("Longitude: " + endLongitude);
+
+                                        Location.distanceBetween(startLatitute, startLongitude, endLatitude, endLongitude, results);
+                                        distance = distance + results[0];
+
+
+                                        textViewDistance.setText("Distance : " + distance);
+
                                     }
-                                    double endLatitude = locationResult.getLocations().get(index).getLatitude();
-                                    double endLongitude = locationResult.getLocations().get(index).getLongitude();
-                                    float[] results = new float[1];
+//                                    endLatitude = locationResult.getLocations().get(index).getLatitude();
+//                                    endLongitude = locationResult.getLocations().get(index).getLongitude();
 
-                                    textViewLatitude.setText("Latitude : " + endLatitude);
-                                    textViewLongitude.setText("Longitude: " + endLongitude);
-
-                                    Location.distanceBetween(startLatitute, startLongitude, endLatitude, endLongitude, results);
-
-                                    textViewDistance.setText("Distance : " + (distance + results[0]));
                                 }
                             }
                         }, Looper.getMainLooper());
