@@ -22,12 +22,12 @@
         android:id="@+id/textView_latitude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
         android:text="Latitutde"
-        app:layout_constraintBottom_toTopOf="@+id/textView_Distance"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_longitude" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView_Distance"
@@ -37,23 +37,23 @@
         android:text="Distance"
         app:layout_constraintBottom_toTopOf="@+id/button_resetDist"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_latitude"
         app:layout_constraintVertical_bias="0.0" />
+
 
     <Button
         android:id="@+id/button_resetDist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="188dp"
         android:onClick="onClick_ResetDistance"
         android:text="Reset Distance"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup_accuracy"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Distance" />
-
 
     <RadioGroup
         android:id="@+id/radioGroup_accuracy"

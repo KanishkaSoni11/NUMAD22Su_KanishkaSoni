@@ -28,6 +28,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
@@ -37,7 +38,7 @@ public class Activity_Location extends AppCompatActivity {
     private TextView textViewLongitude;
     private LocationRequest locationRequest;
     private TextView textViewDistance;
-    private double distance;
+    private double distance = 0.0;
     private double startLatitude;
     private double startLongitude;
     private double endLongitude;
@@ -154,6 +155,7 @@ public class Activity_Location extends AppCompatActivity {
 
             } else {
                 turnOnGPS();
+                getCurrentLocation();
             }
 
         }
@@ -195,7 +197,7 @@ public class Activity_Location extends AppCompatActivity {
 
                 try {
                     LocationSettingsResponse response = task.getResult(ApiException.class);
-                    Toast.makeText(Activity_Location.this, "GPS is already tured on", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_Location.this, "GPS is already turned on", Toast.LENGTH_SHORT).show();
 
                 } catch (ApiException e) {
 
@@ -224,7 +226,7 @@ public class Activity_Location extends AppCompatActivity {
     public void onClick_Precise() {
 
         locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setPriority(Priority.PRIORITY_HIGH_ACCURACY);
 
         locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(2000);
@@ -236,7 +238,7 @@ public class Activity_Location extends AppCompatActivity {
     public void onClick_Approx() {
 
         locationRequest = LocationRequest.create();
-        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        locationRequest.setPriority(Priority.PRIORITY_BALANCED_POWER_ACCURACY);
 
         locationRequest.setInterval(5000);
         locationRequest.setFastestInterval(2000);

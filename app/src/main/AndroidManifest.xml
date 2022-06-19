@@ -19,6 +19,7 @@
         tools:targetApi="31">
         <activity
             android:name=".Activity_Location"
+            android:configChanges="orientation|screenSize"
             android:exported="false" />
         <activity
             android:name=".Activity_Thread"
