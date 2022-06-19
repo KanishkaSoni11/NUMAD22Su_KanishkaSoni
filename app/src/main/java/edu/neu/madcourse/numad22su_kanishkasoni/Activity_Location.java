@@ -18,6 +18,7 @@ import com.google.android.gms.location.LocationRequest;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class Activity_Location extends AppCompatActivity {
     private double startLongitude;
     private double endLongitude;
     private double endLatitude;
+    private RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +51,22 @@ public class Activity_Location extends AppCompatActivity {
 
         ActivityCompat.requestPermissions(this, new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-
+        distance = 0.0;
         textViewLatitude = (TextView) findViewById(R.id.textView_latitude);
         textViewLongitude = (TextView) findViewById(R.id.textView_longitude);
+
+        radioGroup =  findViewById(R.id.radioGroup_accuracy);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId == R.id.radioButton_Approx){
+                    onClick_Approx();
+                }
+                else if(checkedId == R.id.radioButton_Precise) {
+                    onClick_Precise();
+                }
+            }
+        });
 
         textViewDistance = findViewById(R.id.textView_Distance);
 
@@ -204,7 +219,9 @@ public class Activity_Location extends AppCompatActivity {
 
     }
 
-    public void onClick_Precise(View view) {
+
+
+    public void onClick_Precise() {
 
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -216,7 +233,7 @@ public class Activity_Location extends AppCompatActivity {
 
     }
 
-    public void onClick_Approx(View view) {
+    public void onClick_Approx() {
 
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);

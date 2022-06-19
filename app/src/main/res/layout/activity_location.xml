@@ -54,27 +54,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_Distance" />
 
-    <RadioButton
-        android:id="@+id/radioButton_Approx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick_Approx"
-        android:text="Approximate Accuracy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/radioButton_Precise"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_resetDist" />
 
-    <RadioButton
-        android:id="@+id/radioButton_Precise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick_Precise"
-        android:text="Precise Accuracy"
+    <RadioGroup
+        android:id="@+id/radioGroup_accuracy"
+        android:layout_width="379dp"
+        android:layout_height="150dp"
+        android:checkedButton="@id/radioButton_Precise"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/radioButton_Approx"
-        app:layout_constraintTop_toBottomOf="@+id/button_resetDist" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_resetDist">
+
+        <RadioButton
+            android:id="@+id/radioButton_Approx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Approximate Accuracy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/radioButton_Precise"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_resetDist" />
+
+        <RadioButton
+            android:id="@+id/radioButton_Precise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Precise Accuracy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/radioButton_Approx"
+            app:layout_constraintTop_toBottomOf="@+id/button_resetDist" />
+    </RadioGroup>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
