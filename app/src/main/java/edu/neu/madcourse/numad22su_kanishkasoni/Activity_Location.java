@@ -14,10 +14,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 public class Activity_Location extends AppCompatActivity implements LocationListener {
-    private static  final int REQUEST_LOCATION=1;
+    private static final int REQUEST_LOCATION = 1;
     private TextView textViewLatitude;
     private TextView textViewLongitude;
     private LocationManager locationManager;
+    private TextView textViewDistance;
 
 
     @Override
@@ -25,27 +26,20 @@ public class Activity_Location extends AppCompatActivity implements LocationList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
 
-        ActivityCompat.requestPermissions(this,new String[]
+        ActivityCompat.requestPermissions(this, new String[]
                 {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
 
         textViewLatitude = (TextView) findViewById(R.id.textView_latitude);
         textViewLongitude = (TextView) findViewById(R.id.textView_longitude);
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        textViewDistance = findViewById(R.id.textView_Distance);
 
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,new String[]
+            ActivityCompat.requestPermissions(this, new String[]
                     {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
-
-
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-
         }
 
 
@@ -56,11 +50,15 @@ public class Activity_Location extends AppCompatActivity implements LocationList
 
     @Override
     public void onLocationChanged(@NonNull Location location) {
-        System.out.println("Here");
+        float[] results = new float[1];
         double longitude = location.getLongitude();
         double latitude = location.getLatitude();
         textViewLatitude.setText("Latitude :" + latitude);
         textViewLongitude.setText("Longitude: " + longitude);
+
+
+        Location.distanceBetween(latitude, longitude, latitude, longitude, results);
+        textViewDistance.setText("Distance : " + results[0]);
 
     }
 
