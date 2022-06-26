@@ -329,6 +329,7 @@ public class Activity_WebService extends AppCompatActivity {
                     String time = "";
                     if (checkBox_Time.isChecked()) {
                         time = obj.getString("time");
+                        time = "Time: " + time;
                     }
                     AssetHistory_Collector assetHistory_collector = new AssetHistory_Collector(priceUsd, date, time);
 
