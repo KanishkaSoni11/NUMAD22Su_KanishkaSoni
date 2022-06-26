@@ -45,4 +45,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Activity_Thread.class);
         startActivity(intent);
     }
+
+    public void openAcitvity_location(View view){
+        Intent intent = new Intent(this, Activity_Location.class);
+        startActivity(intent);
+    }
 }
