@@ -9,35 +9,36 @@
 
     <Button
         android:id="@+id/onc"
-        android:layout_width="277dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="101dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="24dp"
         android:onClick="callWebserviceButtonHandler"
-        android:text="Get Asset History"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView_webService"
+        android:text="Asset History"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup_coin" />
+        app:layout_constraintHorizontal_bias="0.947"
+        app:layout_constraintStart_toEndOf="@+id/radioGroup_coin"
+        app:layout_constraintTop_toBottomOf="@+id/checkbox_time" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_webService"
-        android:layout_width="336dp"
-        android:layout_height="504dp"
+        android:layout_width="386dp"
+        android:layout_height="275dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.581"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/onc" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup_coin"
+        app:layout_constraintVertical_bias="0.448" />
 
     <RadioGroup
         android:id="@+id/radioGroup_coin"
-        android:layout_width="316dp"
-        android:layout_height="54dp"
+        android:layout_width="281dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="44dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/onc"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -54,8 +55,8 @@
 
         <RadioButton
             android:id="@+id/radioButton_usd"
-            android:layout_width="116dp"
-            android:layout_height="47dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="USD Coin"
             app:layout_constraintBottom_toTopOf="@+id/onc"
             app:layout_constraintEnd_toStartOf="@+id/radioButton_rupee"
@@ -76,6 +77,17 @@
 
 
     </RadioGroup>
+
+    <CheckBox
+        android:id="@+id/checkbox_time"
+        android:layout_width="88dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="52dp"
+        android:text="Time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.918"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

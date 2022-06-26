@@ -19,9 +19,9 @@
         <entry key="app/src/main/res/layout/activity_recyclerView.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/activity_recyclerview.xml" value="0.2947916666666667" />
         <entry key="app/src/main/res/layout/activity_thread.xml" value="0.2947916666666667" />
-        <entry key="app/src/main/res/layout/activity_web_service.xml" value="0.2947916666666667" />
+        <entry key="app/src/main/res/layout/activity_web_service.xml" value="0.282684326171875" />
         <entry key="app/src/main/res/layout/dialog_linkcollector.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_asset_history.xml" value="0.2947916666666667" />
+        <entry key="app/src/main/res/layout/item_asset_history.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_link_collector.xml" value="0.20425724637681159" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_ks.xml" value="0.2185" />
@@ -38,7 +38,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.298541259765625" />
+        <option name="scale" value="0.282684326171875" />
       </ProjectState>
     </option>
   </component>

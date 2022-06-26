@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 
 import org.json.JSONArray;
@@ -28,6 +30,7 @@ import java.util.Scanner;
 public class Activity_WebService extends AppCompatActivity {
     private static final String TAG = "WebServiceActivity";
     private Handler textHandler = new Handler();
+    private CheckBox checkBox_Time;
 
     RecyclerView assetHistoryRecyclerView;
     List<AssetHistory_Collector> assetHistories;
@@ -40,6 +43,8 @@ public class Activity_WebService extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_service);
         radioGroup_coin = findViewById(R.id.radioGroup_coin);
+        checkBox_Time = findViewById(R.id.checkbox_time);
+
 
         radioGroup_coin.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -48,8 +53,7 @@ public class Activity_WebService extends AppCompatActivity {
                     id = "bitcoin";
                 } else if (checkedId == R.id.radioButton_rupee) {
                     id = "dogecoin";
-                }
-                else if (checkedId == R.id.radioButton_usd) {
+                } else if (checkedId == R.id.radioButton_usd) {
                     id = "usd-coin";
                 }
             }
@@ -299,7 +303,6 @@ public class Activity_WebService extends AppCompatActivity {
                 System.out.println("Callllinnggg");
 
 
-
                 url = new URL("https://api.coincap.io/v2/assets/" + id + "/history?interval=d1");
                 //  url = new URL(params[0]);
 
@@ -323,7 +326,11 @@ public class Activity_WebService extends AppCompatActivity {
                     JSONObject obj = dataArray.getJSONObject(i);
                     String priceUsd = obj.getString("priceUsd");
                     String date = obj.getString("date");
-                    AssetHistory_Collector assetHistory_collector = new AssetHistory_Collector(priceUsd, date);
+                    String time = "";
+                    if (checkBox_Time.isChecked()) {
+                        time = obj.getString("time");
+                    }
+                    AssetHistory_Collector assetHistory_collector = new AssetHistory_Collector(priceUsd, date, time);
 
 
                     assetHistories.add(assetHistory_collector);
@@ -333,8 +340,6 @@ public class Activity_WebService extends AppCompatActivity {
                     assetHistory_adapter.setNewList(assetHistories);
 
                 });
-
-                System.out.println("59" + assetHistories);
 
 
             } catch (MalformedURLException e) {
