@@ -4,14 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.RadioGroup;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,39 +32,45 @@ public class Activity_WebService extends AppCompatActivity {
     RecyclerView assetHistoryRecyclerView;
     List<AssetHistory_Collector> assetHistories;
     AssetHistory_Adapter assetHistory_adapter;
+    private RadioGroup radioGroup_coin;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_service);
+        radioGroup_coin = findViewById(R.id.radioGroup_coin);
 
-        assetHistoryRecyclerView = findViewById(R.id.recyclerView_webService);
+        radioGroup_coin.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.radioButton_bitcoin) {
+                    id = "bitcoin";
+                } else if (checkedId == R.id.radioButton_rupee) {
+                    id = "dogecoin";
+                }
+                else if (checkedId == R.id.radioButton_usd) {
+                    id = "usd-coin";
+                }
+            }
+        });
 
-        assetHistories = new ArrayList<>();
-
-        assetHistoryRecyclerView.setHasFixedSize(true);
-
-        //This defines the way in which the RecyclerView is oriented
-        assetHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        //Associates the adapter with the RecyclerView
-        assetHistory_adapter = new AssetHistory_Adapter(assetHistories, this);
-        assetHistoryRecyclerView.setAdapter(assetHistory_adapter);
 
     }
 
     public void callWebserviceButtonHandler(View view) {
         Activity_WebService.AssetHistory childThread = new Activity_WebService.AssetHistory();
         new Thread(childThread).start();
+        assetHistoryRecyclerView = findViewById(R.id.recyclerView_webService);
 
+        assetHistories = new ArrayList<>();
 
-//        Activity_AssetHistory activity_assetHistory = new Activity_AssetHistory();
-//        Intent intent = new Intent(this, Activity_AssetHistory.class);
-//        startActivity(intent);
+        assetHistoryRecyclerView.setHasFixedSize(true);
 
-//        task.execute(mURLEditText.getText().toString()); // This is a security risk.  Don't let your user enter the URL in a real app.
+        assetHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-
+        assetHistory_adapter = new AssetHistory_Adapter(assetHistories, this);
+        assetHistoryRecyclerView.setAdapter(assetHistory_adapter);
     }
 
 //    private class getAssetHistory extends AsyncTask<String, Integer, String[]> {
@@ -293,7 +297,7 @@ public class Activity_WebService extends AppCompatActivity {
             URL url = null;
             try {
                 System.out.println("Callllinnggg");
-                String id = "bitcoin";
+
 
 
                 url = new URL("https://api.coincap.io/v2/assets/" + id + "/history?interval=d1");

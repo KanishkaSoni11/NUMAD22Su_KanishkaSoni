@@ -2,33 +2,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity_WebService">
 
     <Button
         android:id="@+id/onc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="96dp"
+        android:layout_width="277dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="24dp"
         android:onClick="callWebserviceButtonHandler"
-        android:text="Ping Web Service"
+        android:text="Get Asset History"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView_webService"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/result_textview" />
-
-    <TextView
-        android:id="@+id/result_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/onc"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup_coin" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_webService"
@@ -39,5 +29,53 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/onc" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup_coin"
+        android:layout_width="316dp"
+        android:layout_height="54dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/onc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButton_bitcoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bitcoin"
+            app:layout_constraintBottom_toTopOf="@+id/onc"
+            app:layout_constraintEnd_toStartOf="@+id/radioButton_usd"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/radioButton_usd"
+            android:layout_width="116dp"
+            android:layout_height="47dp"
+            android:text="USD Coin"
+            app:layout_constraintBottom_toTopOf="@+id/onc"
+            app:layout_constraintEnd_toStartOf="@+id/radioButton_rupee"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/radioButton_bitcoin"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/radioButton_rupee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Doge Coin"
+            app:layout_constraintBottom_toTopOf="@+id/onc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/radioButton_usd"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </RadioGroup>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
