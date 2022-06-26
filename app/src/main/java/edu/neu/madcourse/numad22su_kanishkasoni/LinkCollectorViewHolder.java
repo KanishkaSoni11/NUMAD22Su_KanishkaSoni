@@ -12,8 +12,8 @@ public class LinkCollectorViewHolder extends RecyclerView.ViewHolder{
 
     public LinkCollectorViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.nameTV = itemView.findViewById(R.id.name);
-        this.urlTV = itemView.findViewById(R.id.url);
+        this.nameTV = itemView.findViewById(R.id.item_name);
+        this.urlTV = itemView.findViewById(R.id.item_url);
     }
 
     public void bindThisData(LinkCollector theLinkToBind) {

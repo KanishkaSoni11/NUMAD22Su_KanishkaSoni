@@ -6,7 +6,7 @@
     android:onClick="onClick_Url">
 
     <TextView
-        android:id="@+id/name"
+        android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -14,13 +14,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_toStartOf="@id/url"
+        android:layout_toStartOf="@id/date"
         android:textColor="@color/black"
         android:textSize="20sp"
         tools:text="John Doe" />
 
     <TextView
-        android:id="@+id/url"
+        android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

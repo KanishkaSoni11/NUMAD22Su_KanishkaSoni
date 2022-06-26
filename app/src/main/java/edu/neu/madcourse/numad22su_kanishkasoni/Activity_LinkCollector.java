@@ -4,18 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +53,7 @@ public class Activity_LinkCollector extends AppCompatActivity implements LinkCol
     public void onClick_Url(View view) {
         System.out.println("View 1 + " + view);
 
-        TextView textView = view.findViewById(R.id.url);
+        TextView textView = view.findViewById(R.id.date);
         CharSequence text = textView.getText();
         System.out.println("View -- " + text);
         Uri webpage = Uri.parse(String.valueOf(text));
