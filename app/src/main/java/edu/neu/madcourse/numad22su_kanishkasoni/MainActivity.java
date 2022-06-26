@@ -50,4 +50,10 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Activity_Location.class);
         startActivity(intent);
     }
+
+    public void openAcitvity_webService(View view){
+        Intent intent = new Intent(this, Activity_WebService.class);
+        startActivity(intent);
+    }
+
 }
