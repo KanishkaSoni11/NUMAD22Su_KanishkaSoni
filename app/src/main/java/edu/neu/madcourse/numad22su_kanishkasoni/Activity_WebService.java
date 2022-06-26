@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.RadioGroup;
-import android.widget.TextView;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
 
 import org.json.JSONArray;
@@ -37,6 +40,7 @@ public class Activity_WebService extends AppCompatActivity {
     AssetHistory_Adapter assetHistory_adapter;
     private RadioGroup radioGroup_coin;
     private String id;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class Activity_WebService extends AppCompatActivity {
         setContentView(R.layout.activity_web_service);
         radioGroup_coin = findViewById(R.id.radioGroup_coin);
         checkBox_Time = findViewById(R.id.checkbox_time);
+        progressBar = findViewById(R.id.pbLoading);
 
 
         radioGroup_coin.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -63,8 +68,13 @@ public class Activity_WebService extends AppCompatActivity {
     }
 
     public void callWebserviceButtonHandler(View view) {
+        if(id == null) {
+            Toast.makeText(this, "Please select one Asset", Toast.LENGTH_SHORT).show();
+        }
+        progressBar.setVisibility(ProgressBar.VISIBLE);
         Activity_WebService.AssetHistory childThread = new Activity_WebService.AssetHistory();
         new Thread(childThread).start();
+
         assetHistoryRecyclerView = findViewById(R.id.recyclerView_webService);
 
         assetHistories = new ArrayList<>();
@@ -75,219 +85,6 @@ public class Activity_WebService extends AppCompatActivity {
 
         assetHistory_adapter = new AssetHistory_Adapter(assetHistories, this);
         assetHistoryRecyclerView.setAdapter(assetHistory_adapter);
-    }
-
-//    private class getAssetHistory extends AsyncTask<String, Integer, String[]> {
-//
-//        @Override
-//        protected void onProgressUpdate(Integer... values) {
-//            Log.i(TAG, "Making progress...");
-//        }
-//
-//        @Override
-//        protected String[] doInBackground(String... params) {
-//
-//
-//            String[] results = new String[2];
-//            URL url = null;
-//            try {
-//                String id = "bitcoin";
-//
-//
-//                url = new URL("https://api.coincap.io/v2/assets/" + id + "/history?interval=d1");
-//                //  url = new URL(params[0]);
-//
-//                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                conn.setRequestMethod("GET");
-//                conn.setDoInput(true);
-//
-//                conn.connect();
-//
-//                // Read response.
-//                InputStream inputStream = conn.getInputStream();
-//                final String resp = convertStreamToString(inputStream);
-//
-//
-//                JSONObject jObject = new JSONObject(resp);
-//                //JSONObject data = jObject.getJSONObject("data");
-//                JSONArray dataArray = jObject.getJSONArray("data");
-//
-//                System.out.println(dataArray);
-//                for (int i = 0; i < dataArray.length(); i++) {
-//                    JSONObject obj = dataArray.getJSONObject(i);
-//                    System.out.println(obj.getString("priceUsd"));
-//                    String history = obj.getString("priceUsd");
-//                    results[0] = history;
-//                }
-//
-//
-//                return results;
-//
-//            } catch (MalformedURLException e) {
-//                Log.e(TAG, "MalformedURLException");
-//                e.printStackTrace();
-//            } catch (ProtocolException e) {
-//                Log.e(TAG, "ProtocolException");
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                Log.e(TAG, "IOException");
-//                e.printStackTrace();
-//            } catch (JSONException e) {
-//                Log.e(TAG, "JSONException");
-//                e.printStackTrace();
-//            }
-//            results[0] = "Something went wrong";
-//            return (results);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String... s) {
-//            super.onPostExecute(s);
-//            TextView result_view = (TextView) findViewById(R.id.result_textview);
-//            result_view.setText(s[0]);
-//        }
-//    }
-//
-//    private class getAssetDetails extends AsyncTask<String, Integer, String[]> {
-//
-//        @Override
-//        protected void onProgressUpdate(Integer... values) {
-//            Log.i(TAG, "Making progress...");
-//        }
-//
-//        @Override
-//        protected String[] doInBackground(String... params) {
-//
-//
-//            String[] results = new String[2];
-//            URL url = null;
-//            try {
-//                String id = "bitcoin";
-//
-//                url = new URL("https://api.coincap.io/v2/assets/" + id);
-//                //  url = new URL(params[0]);
-//
-//                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                conn.setRequestMethod("GET");
-//                conn.setDoInput(true);
-//
-//                conn.connect();
-//
-//                // Read response.
-//                InputStream inputStream = conn.getInputStream();
-//                final String resp = convertStreamToString(inputStream);
-//
-//
-//                JSONObject jObject = new JSONObject(resp);
-//                JSONObject data = jObject.getJSONObject("data");
-//                System.out.println(data);
-//                String rank = data.getString("rank");
-//                results[0] = rank;
-//
-//                return results;
-//
-//            } catch (MalformedURLException e) {
-//                Log.e(TAG, "MalformedURLException");
-//                e.printStackTrace();
-//            } catch (ProtocolException e) {
-//                Log.e(TAG, "ProtocolException");
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                Log.e(TAG, "IOException");
-//                e.printStackTrace();
-//            } catch (JSONException e) {
-//                Log.e(TAG, "JSONException");
-//                e.printStackTrace();
-//            }
-//            results[0] = "Something went wrong";
-//            return (results);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String... s) {
-//            super.onPostExecute(s);
-//            TextView result_view = (TextView) findViewById(R.id.result_textview);
-//            result_view.setText(s[0]);
-//        }
-//    }
-//
-//    private class PingWebServiceTask extends AsyncTask<String, Integer, String[]> {
-//
-//        @Override
-//        protected void onProgressUpdate(Integer... values) {
-//            Log.i(TAG, "Making progress...");
-//        }
-//
-//        @Override
-//        protected String[] doInBackground(String... params) {
-//
-//
-//            String[] results = new String[2];
-//            URL url = null;
-//            try {
-//
-//                url = new URL("https://api.coincap.io/v2/assets");
-//                //  url = new URL(params[0]);
-//
-//                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//                conn.setRequestMethod("GET");
-//                conn.setDoInput(true);
-//
-//                conn.connect();
-//
-//                // Read response.
-//                InputStream inputStream = conn.getInputStream();
-//                final String resp = convertStreamToString(inputStream);
-//
-//
-//                JSONObject jObject = new JSONObject(resp);
-//                JSONArray jsonArray = jObject.getJSONArray("data");
-//
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                    JSONObject obj = jsonArray.getJSONObject(i);
-//                    String id = obj.getString("id");
-//                    results[i] = id;
-//                    System.out.println(obj);
-//                }
-//
-//
-//                return results;
-//
-//            } catch (MalformedURLException e) {
-//                Log.e(TAG, "MalformedURLException");
-//                e.printStackTrace();
-//            } catch (ProtocolException e) {
-//                Log.e(TAG, "ProtocolException");
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                Log.e(TAG, "IOException");
-//                e.printStackTrace();
-//            } catch (JSONException e) {
-//                Log.e(TAG, "JSONException");
-//                e.printStackTrace();
-//            }
-//            results[0] = "Something went wrong";
-//            return (results);
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String... s) {
-//            super.onPostExecute(s);
-//            TextView result_view = (TextView) findViewById(R.id.result_textview);
-//            result_view.setText(s[0]);
-//        }
-//    }
-
-
-    /**
-     * Helper function
-     *
-     * @param is
-     * @return
-     */
-    private String convertStreamToString(InputStream is) {
-        Scanner s = new Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next().replace(",", ",\n") : "";
     }
 
 
@@ -339,6 +136,8 @@ public class Activity_WebService extends AppCompatActivity {
 
                 textHandler.post(() -> {
                     assetHistory_adapter.setNewList(assetHistories);
+                    progressBar.setVisibility(ProgressBar.INVISIBLE);
+
 
                 });
 
@@ -358,11 +157,6 @@ public class Activity_WebService extends AppCompatActivity {
             }
 
 
-        }
-
-        public List<AssetHistory_Collector> getResults() {
-            System.out.println(this.results);
-            return this.results;
         }
 
 
